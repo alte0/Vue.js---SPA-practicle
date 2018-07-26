@@ -5,7 +5,8 @@ export default {
         title: 'First ad',
         description: 'Hello  i am description',
         promo: false,
-        imageSrc: 'https://v1.vuetifyjs.com/static/doc-images/carousel/squirrel.jpg',
+        imageSrc:
+          'https://v1.vuetifyjs.com/static/doc-images/carousel/squirrel.jpg',
         id: '123'
       },
       {
@@ -19,13 +20,24 @@ export default {
         title: 'Third ad',
         description: 'Hello  i am description',
         promo: true,
-        imageSrc: 'https://v1.vuetifyjs.com/static/doc-images/carousel/bird.jpg',
+        imageSrc:
+          'https://v1.vuetifyjs.com/static/doc-images/carousel/bird.jpg',
         id: '12345'
       }
     ]
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    createAd (state, payLoad) {
+      state.ads.push(payLoad)
+    }
+  },
+  actions: {
+    createAd ({ commit }, payLoad) {
+      payLoad.id = '123654'
+
+      commit('createAd', payLoad)
+    }
+  },
   getters: {
     ads (state) {
       return state.ads
@@ -37,6 +49,11 @@ export default {
     },
     myAds (state) {
       return state.ads
+    },
+    adById (state) {
+      return adId => {
+        return state.ads.find(ad => ad.id === adId)
+      }
     }
   }
 }

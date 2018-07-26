@@ -13,11 +13,11 @@
           :rules="[v => !!v || 'Title is required']"
           ></v-text-field>
           <v-textarea
-          name="decription"
-          label="Ad decription"
+          name="description"
+          label="Ad description"
           type="text"
-          v-model="decription"
-          :rules="[v => !!v || 'Decription is required']"
+          v-model="description"
+          :rules="[v => !!v || 'description is required']"
           ></v-textarea>
         </v-form>
         <v-layout row class="mb-3">
@@ -64,7 +64,7 @@ export default {
     return {
       title: '',
       valid: false,
-      decription: '',
+      description: '',
       promo: false
     }
   },
@@ -73,10 +73,11 @@ export default {
       if (this.$refs.form.validate()) {
         const ad = {
           title: this.title,
-          decription: this.decription,
-          promo: this.promo
+          description: this.description,
+          promo: this.promo,
+          imageSrc: 'https://ru.vuejs.org/images/logo.png?_sw-precache=cf23526f451784ff137f161b8fe18d5a'
         }
-        console.log(ad)
+        this.$store.dispatch('createAd', ad)
       }
     }
   }
