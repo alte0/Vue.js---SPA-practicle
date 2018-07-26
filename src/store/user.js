@@ -46,7 +46,7 @@ export default {
         throw error
       }
     },
-    autoLoginUser ({ commit }, payLoad) {
+    autoLoginUser ({commit}, payLoad) {
       commit('setUser', new User(payLoad.uid))
     },
     logoutUser ({ commit }) {
@@ -56,9 +56,9 @@ export default {
   },
   getters: {
     user (state) {
-      return this.user
+      return state.user
     },
-    isUserLoggenIn (state) {
+    isUserLoggedIn (state) {
       return state.user !== null
     }
   }

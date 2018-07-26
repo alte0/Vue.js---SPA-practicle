@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import AuthGuard from './auth-guard'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Ad from '@/components/Ads/Ad'
@@ -26,12 +27,14 @@ export default new Router({
     {
       path: '/list',
       name: 'list',
-      component: AdList
+      component: AdList,
+      beforeEnter: AuthGuard
     },
     {
       path: '/new',
       name: 'newAd',
-      component: NewAd
+      component: NewAd,
+      beforeEnter: AuthGuard
     },
     {
       path: '/login',
@@ -46,7 +49,8 @@ export default new Router({
     {
       path: '/orders',
       name: 'orders',
-      component: Orders
+      component: Orders,
+      beforeEnter: AuthGuard
     }
   ],
   mode: 'history'
