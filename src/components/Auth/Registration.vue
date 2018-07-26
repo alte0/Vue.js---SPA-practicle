@@ -42,7 +42,8 @@
             <v-spacer></v-spacer>
             <v-btn color="primary"
             v-on:click="onSubmit"
-            v-bind:disabled="!valid"
+            v-bind:loading="loading"
+            v-bind:disabled="!valid || loading"
             >Create account</v-btn>
           </v-card-actions>
         </v-card>
@@ -74,15 +75,24 @@ export default {
       ]
     }
   },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
   methods: {
     onSubmit () {
       if (this.$refs.form.validate()) {
         const user = {
           email: this.email,
-          password: this.password,
-          confirmPassword: this.confirmPassword
+          password: this.password
         }
-        console.log(user)
+
+        this.$store.dispatch('registerUser', user)
+        .then(() => {
+          this.$router.push('/')
+        })
+        .catch(err => console.log(err))
       }
     }
   }
