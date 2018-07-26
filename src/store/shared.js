@@ -8,10 +8,10 @@ export default {
       state.loading = payLoad
     },
     setError (state, payLoad) {
-      state.setError = payLoad
+      state.error = payLoad
     },
     clearError (state, payLoad) {
-      state.setError = null
+      state.error = null
     }
   },
   actions: {
