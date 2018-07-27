@@ -48,7 +48,8 @@
           <v-flex xs12>
             <v-spacer></v-spacer>
             <v-btn class="success ml-0"
-            :disabled="!valid"
+            :loading="loading"
+            :disabled="!valid || loading"
             v-on:click="createAd">
               Create ad
             </v-btn>
@@ -68,6 +69,11 @@ export default {
       promo: false
     }
   },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
   methods: {
     createAd () {
       if (this.$refs.form.validate()) {
@@ -77,7 +83,12 @@ export default {
           promo: this.promo,
           imageSrc: 'https://ru.vuejs.org/images/logo.png?_sw-precache=cf23526f451784ff137f161b8fe18d5a'
         }
+
         this.$store.dispatch('createAd', ad)
+          .then(() => {
+            this.$router.push('/list')
+          })
+          .catch(() => {})
       }
     }
   }
